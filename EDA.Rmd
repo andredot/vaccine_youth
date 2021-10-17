@@ -1,0 +1,164 @@
+---
+title: "Vaccini Notebook"
+output:
+  html_document:
+    df_print: paged
+    code_folding: hide
+  pdf_document: default
+---
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+```
+
+# Import dati
+
+Da piattaforma open data del governo.
+
+Dati somministrazioni giornaliere
+
+```{r, message = FALSE, warning = FALSE}
+library(readr)
+somministrazioni_vaccini <- read_csv("https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.csv", 
+    col_types = cols(data_somministrazione = col_date(format = "%Y-%m-%d"), 
+        sesso_maschile = col_integer(), 
+        sesso_femminile = col_integer(), 
+        prima_dose = col_integer(), seconda_dose = col_integer(), 
+        codice_NUTS1 = col_skip(), codice_NUTS2 = col_skip(), 
+        codice_regione_ISTAT = col_skip()))
+
+head(somministrazioni_vaccini)
+```
+
+Dati sulla platea totale di riceventi
+
+```{r, message = FALSE, warning = FALSE}
+platea <- read_csv("https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/platea.csv", 
+    col_types = cols(totale_popolazione = col_integer()))
+
+head(platea)
+```
+
+# Preparazione dei dati
+
+```{r, message = FALSE, warning = FALSE}
+platea <- platea %>% 
+  mutate( area = as.factor(area),
+          fascia_anagrafica = as.factor(fascia_anagrafica),
+          )
+
+somministrazioni_vaccini$fascia_anagrafica <- 
+  replace( somministrazioni_vaccini$fascia_anagrafica, 
+           somministrazioni_vaccini$fascia_anagrafica %in% c("80-89", "90+"), 
+           "80+")
+  
+somministrazioni_vaccini <- somministrazioni_vaccini %>% 
+  mutate(fornitore = as.factor(fornitore),
+         area = as.factor(area),
+         fascia_anagrafica = as.factor(fascia_anagrafica),
+         ) %>% 
+  select( -c(sesso_maschile, sesso_femminile))
+```
+
+Unione somministrazioni e platea (tramite codice regione)
+
+```{r, message = FALSE, warning = FALSE}
+vaccini <- left_join(somministrazioni_vaccini, platea, 
+                     by = c("area", "fascia_anagrafica"))
+```
+
+# Analisi prima dose - Italia
+
+```{r, message = FALSE, warning = FALSE}
+ggplot(vaccini, 
+       aes( x = data_somministrazione,
+            y = prima_dose,
+            color = fascia_anagrafica)) +
+  geom_line() +
+  facet_wrap( ~fascia_anagrafica)
+```
+
+
+```{r, message = FALSE, warning = FALSE}
+platea_summary <- platea %>% 
+  group_by(fascia_anagrafica) %>% 
+  summarise(totale_popolazione = sum(totale_popolazione))
+
+prog_vaccini <- vaccini %>%
+  group_by(data_somministrazione, fascia_anagrafica) %>% 
+  summarise(prima_dose = sum(prima_dose)) %>% 
+  ungroup() %>% 
+  group_by(fascia_anagrafica) %>% 
+  mutate( prog_shot = cumsum(prima_dose)) %>% 
+  left_join(platea_summary) %>% 
+  mutate( prog_perc = prog_shot / totale_popolazione) %>% 
+  ungroup()
+  
+```
+
+```{r, message = FALSE, warning = FALSE}
+ggplot(prog_vaccini, 
+       aes( x = data_somministrazione,
+            y = prog_perc*100,
+            color = fascia_anagrafica)) +
+  geom_line(size=1) +
+  coord_cartesian(ylim = c(0,100)) +
+  labs( title = "Vaccinati prima dose",
+        subtitle = "Percentuale di completamento per età",
+        y = NULL,
+        x = NULL)
+```
+
+Ogni curva ha tre fasi: la prima che sale lentamente, una fase ripida dove molti di vaccinano in poco tempo, una terza parte più piatta che corrisponde alle difficoltà nel coinvolgere la porzione più esitante per quella fascia d'età.
+
+In altre parole, più la curva è ripida più la gente è rapida nell'aderire alle opportunità di vaccinarsi per la loro fascia d'età:
+
+- gli 80+ sono quasi completamente vaccinati
+- i 70-79 si sono fatti vaccinare rapidamente
+- andando verso i più giovani si nota una progressivo appiattimento della fase ripida
+
+
+# Analisi prima dose - Regioni
+
+```{r, message = FALSE, warning = FALSE}
+reg_vaccini <- vaccini %>%
+  group_by(area, data_somministrazione, fascia_anagrafica) %>% 
+  summarise(prima_dose = sum(prima_dose)) %>% 
+  ungroup() %>% 
+  group_by(area, fascia_anagrafica) %>% 
+  mutate( prog_shot = cumsum(prima_dose)) %>% 
+  left_join(platea) %>% 
+  mutate( prog_perc = prog_shot / totale_popolazione) %>% 
+  ungroup()
+```
+
+```{r, echo=FALSE, fig.height=15}
+ggplot(reg_vaccini, 
+       aes( x = data_somministrazione,
+            y = prog_perc*100,
+            color = fascia_anagrafica)) +
+  geom_line() +
+  facet_wrap( ~area, ncol = 3) +
+  coord_cartesian(ylim = c(0,100)) +
+  labs( title = "Vaccinati prima dose",
+        subtitle = "Percentuale di completamento regionale per età",
+        y = NULL,
+        x = NULL)
+```
+
+Trentino 
+
+```{r}
+reg_vaccini %>% 
+  filter(area == "PAT") %>% 
+  ggplot(   aes( x = data_somministrazione,
+            y = prog_perc*100,
+            color = fascia_anagrafica)) +
+    geom_line(size=1) +
+    coord_cartesian(ylim = c(0,100)) +
+    labs( title = "Vaccinati prima dose PAT",
+        subtitle = "Percentuale di completamento per età",
+        y = NULL,
+        x = NULL)
+```
+
