@@ -1,46 +1,33 @@
-% Options for packages loaded elsewhere
-\PassOptionsToPackage{unicode}{hyperref}
-\PassOptionsToPackage{hyphens}{url}
-%
-\documentclass[
-]{article}
+\documentclass[]{article}
 \usepackage{lmodern}
-\usepackage{amsmath}
+\usepackage{amssymb,amsmath}
 \usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
-  \usepackage{textcomp} % provide euro and other symbols
-  \usepackage{amssymb}
-\else % if luatex or xetex
-  \usepackage{unicode-math}
-  \defaultfontfeatures{Scale=MatchLowercase}
-  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 \fi
-% Use upquote if available, for straight quotes in verbatim environments
+% use upquote if available, for straight quotes in verbatim environments
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
-\IfFileExists{microtype.sty}{% use microtype if available
-  \usepackage[]{microtype}
-  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
-\usepackage{xcolor}
-\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
-\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\PassOptionsToPackage{hyphens}{url} % url is loaded by hyperref
+\usepackage[unicode=true]{hyperref}
 \hypersetup{
-  pdftitle={Vaccini Notebook},
-  hidelinks,
-  pdfcreator={LaTeX via pandoc}}
-\urlstyle{same} % disable monospaced font for URLs
+            pdftitle={Vaccini Notebook},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
 \usepackage[margin=1in]{geometry}
 \usepackage{color}
 \usepackage{fancyvrb}
@@ -51,38 +38,38 @@
 \usepackage{framed}
 \definecolor{shadecolor}{RGB}{248,248,248}
 \newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
 \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
 \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
 \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
 \newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
 \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\usepackage{graphicx}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -91,17 +78,31 @@
 % margins by default, and it is still possible to overwrite the defaults
 % using explicit options in \includegraphics[width, height, ...]{}
 \setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
-% Set default figure placement to htbp
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
 \makeatletter
 \def\fps@figure{htbp}
 \makeatother
-\setlength{\emergencystretch}{3em} % prevent overfull lines
-\providecommand{\tightlist}{%
-  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
-\ifluatex
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
+
 
 \title{Vaccini Notebook}
 \author{}
@@ -112,12 +113,11 @@
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(tidyverse)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{import-dati}{%
-\section{Import dati}\label{import-dati}}
+\section{Import dati}\label{import-dati}
 
 Da piattaforma open data del governo.
 
@@ -125,41 +125,42 @@ Dati somministrazioni giornaliere
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{library}\NormalTok{(readr)}
-\NormalTok{somministrazioni\_vaccini }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/italia/covid19{-}opendata{-}vaccini/master/dati/somministrazioni{-}vaccini{-}latest.csv"}\NormalTok{, }
-    \AttributeTok{col\_types =} \FunctionTok{cols}\NormalTok{(}\AttributeTok{data\_somministrazione =} \FunctionTok{col\_date}\NormalTok{(}\AttributeTok{format =} \StringTok{"\%Y{-}\%m{-}\%d"}\NormalTok{), }
-        \AttributeTok{sesso\_maschile =} \FunctionTok{col\_integer}\NormalTok{(), }
-        \AttributeTok{sesso\_femminile =} \FunctionTok{col\_integer}\NormalTok{(), }
-        \AttributeTok{prima\_dose =} \FunctionTok{col\_integer}\NormalTok{(), }\AttributeTok{seconda\_dose =} \FunctionTok{col\_integer}\NormalTok{(), }
-        \AttributeTok{codice\_NUTS1 =} \FunctionTok{col\_skip}\NormalTok{(), }\AttributeTok{codice\_NUTS2 =} \FunctionTok{col\_skip}\NormalTok{(), }
-        \AttributeTok{codice\_regione\_ISTAT =} \FunctionTok{col\_skip}\NormalTok{()))}
+\KeywordTok{library}\NormalTok{(readr)}
+\NormalTok{somministrazioni_vaccini <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/somministrazioni-vaccini-latest.csv"}\NormalTok{, }
+    \DataTypeTok{col_types =} \KeywordTok{cols}\NormalTok{(}\DataTypeTok{data_somministrazione =} \KeywordTok{col_date}\NormalTok{(}\DataTypeTok{format =} \StringTok{"%Y-%m-%d"}\NormalTok{), }
+        \DataTypeTok{sesso_maschile =} \KeywordTok{col_integer}\NormalTok{(), }
+        \DataTypeTok{sesso_femminile =} \KeywordTok{col_integer}\NormalTok{(), }
+        \DataTypeTok{prima_dose =} \KeywordTok{col_integer}\NormalTok{(), }\DataTypeTok{seconda_dose =} \KeywordTok{col_integer}\NormalTok{(), }
+        \DataTypeTok{codice_NUTS1 =} \KeywordTok{col_skip}\NormalTok{(), }\DataTypeTok{codice_NUTS2 =} \KeywordTok{col_skip}\NormalTok{(), }
+        \DataTypeTok{codice_regione_ISTAT =} \KeywordTok{col_skip}\NormalTok{()))}
 
-\FunctionTok{head}\NormalTok{(somministrazioni\_vaccini)}
+\KeywordTok{head}\NormalTok{(somministrazioni_vaccini)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-## # A tibble: 6 x 9
-##   data_somministr~ fornitore area  fascia_anagrafi~ sesso_maschile
-##   <date>           <chr>     <chr> <chr>                     <int>
-## 1 2020-12-27       Pfizer/B~ ABR   20-29                         1
-## 2 2020-12-27       Pfizer/B~ ABR   30-39                         1
-## 3 2020-12-27       Pfizer/B~ ABR   40-49                         1
-## 4 2020-12-27       Pfizer/B~ ABR   50-59                         4
-## 5 2020-12-27       Pfizer/B~ ABR   60-69                        10
-## 6 2020-12-27       Pfizer/B~ ABR   70-79                         1
-## # ... with 4 more variables: sesso_femminile <int>, prima_dose <int>,
-## #   seconda_dose <int>, nome_area <chr>
+## # A tibble: 6 x 11
+##   data_somministrazione fornitore       area  fascia_anagrafica sesso_maschile
+##   <date>                <chr>           <chr> <chr>                      <int>
+## 1 2020-12-27            Pfizer/BioNTech ABR   20-29                          1
+## 2 2020-12-27            Pfizer/BioNTech ABR   30-39                          1
+## 3 2020-12-27            Pfizer/BioNTech ABR   40-49                          1
+## 4 2020-12-27            Pfizer/BioNTech ABR   50-59                          7
+## 5 2020-12-27            Pfizer/BioNTech ABR   60-69                         12
+## 6 2020-12-27            Pfizer/BioNTech ABR   70-79                          1
+## # ... with 6 more variables: sesso_femminile <int>, prima_dose <int>,
+## #   seconda_dose <int>, pregressa_infezione <dbl>,
+## #   dose_addizionale_booster <dbl>, nome_area <chr>
 \end{verbatim}
 
 Dati sulla platea totale di riceventi
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{platea }\OtherTok{\textless{}{-}} \FunctionTok{read\_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/italia/covid19{-}opendata{-}vaccini/master/dati/platea.csv"}\NormalTok{, }
-    \AttributeTok{col\_types =} \FunctionTok{cols}\NormalTok{(}\AttributeTok{totale\_popolazione =} \FunctionTok{col\_integer}\NormalTok{()))}
+\NormalTok{platea <-}\StringTok{ }\KeywordTok{read_csv}\NormalTok{(}\StringTok{"https://raw.githubusercontent.com/italia/covid19-opendata-vaccini/master/dati/platea.csv"}\NormalTok{, }
+    \DataTypeTok{col_types =} \KeywordTok{cols}\NormalTok{(}\DataTypeTok{totale_popolazione =} \KeywordTok{col_integer}\NormalTok{()))}
 
-\FunctionTok{head}\NormalTok{(platea)}
+\KeywordTok{head}\NormalTok{(platea)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -167,35 +168,34 @@ Dati sulla platea totale di riceventi
 ## # A tibble: 6 x 4
 ##   area  nome_area fascia_anagrafica totale_popolazione
 ##   <chr> <chr>     <chr>                          <int>
-## 1 ABR   Abruzzo   12-19                          94727
-## 2 ABR   Abruzzo   20-29                         125230
-## 3 ABR   Abruzzo   30-39                         146965
-## 4 ABR   Abruzzo   40-49                         187162
-## 5 ABR   Abruzzo   50-59                         208686
-## 6 ABR   Abruzzo   60-69                         171793
+## 1 ABR   Abruzzo   05-11                          76431
+## 2 ABR   Abruzzo   12-19                          94727
+## 3 ABR   Abruzzo   20-29                         125230
+## 4 ABR   Abruzzo   30-39                         146965
+## 5 ABR   Abruzzo   40-49                         187162
+## 6 ABR   Abruzzo   50-59                         208686
 \end{verbatim}
 
-\hypertarget{preparazione-dei-dati}{%
-\section{Preparazione dei dati}\label{preparazione-dei-dati}}
+\section{Preparazione dei dati}\label{preparazione-dei-dati}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{platea }\OtherTok{\textless{}{-}}\NormalTok{ platea }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{( }\AttributeTok{area =} \FunctionTok{as.factor}\NormalTok{(area),}
-          \AttributeTok{fascia\_anagrafica =} \FunctionTok{as.factor}\NormalTok{(fascia\_anagrafica),}
+\NormalTok{platea <-}\StringTok{ }\NormalTok{platea }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{area =} \KeywordTok{as.factor}\NormalTok{(area),}
+          \DataTypeTok{fascia_anagrafica =} \KeywordTok{as.factor}\NormalTok{(fascia_anagrafica),}
 \NormalTok{          )}
 
-\NormalTok{somministrazioni\_vaccini}\SpecialCharTok{$}\NormalTok{fascia\_anagrafica }\OtherTok{\textless{}{-}} 
-  \FunctionTok{replace}\NormalTok{( somministrazioni\_vaccini}\SpecialCharTok{$}\NormalTok{fascia\_anagrafica, }
-\NormalTok{           somministrazioni\_vaccini}\SpecialCharTok{$}\NormalTok{fascia\_anagrafica }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"80{-}89"}\NormalTok{, }\StringTok{"90+"}\NormalTok{), }
+\NormalTok{somministrazioni_vaccini}\OperatorTok{$}\NormalTok{fascia_anagrafica <-}\StringTok{ }
+\StringTok{  }\KeywordTok{replace}\NormalTok{( somministrazioni_vaccini}\OperatorTok{$}\NormalTok{fascia_anagrafica, }
+\NormalTok{           somministrazioni_vaccini}\OperatorTok{$}\NormalTok{fascia_anagrafica }\OperatorTok{%in%}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"80-89"}\NormalTok{, }\StringTok{"90+"}\NormalTok{), }
            \StringTok{"80+"}\NormalTok{)}
   
-\NormalTok{somministrazioni\_vaccini }\OtherTok{\textless{}{-}}\NormalTok{ somministrazioni\_vaccini }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{(}\AttributeTok{fornitore =} \FunctionTok{as.factor}\NormalTok{(fornitore),}
-         \AttributeTok{area =} \FunctionTok{as.factor}\NormalTok{(area),}
-         \AttributeTok{fascia\_anagrafica =} \FunctionTok{as.factor}\NormalTok{(fascia\_anagrafica),}
-\NormalTok{         ) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{select}\NormalTok{( }\SpecialCharTok{{-}}\FunctionTok{c}\NormalTok{(sesso\_maschile, sesso\_femminile))}
+\NormalTok{somministrazioni_vaccini <-}\StringTok{ }\NormalTok{somministrazioni_vaccini }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{fornitore =} \KeywordTok{as.factor}\NormalTok{(fornitore),}
+         \DataTypeTok{area =} \KeywordTok{as.factor}\NormalTok{(area),}
+         \DataTypeTok{fascia_anagrafica =} \KeywordTok{as.factor}\NormalTok{(fascia_anagrafica),}
+\NormalTok{         ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{( }\OperatorTok{-}\KeywordTok{c}\NormalTok{(sesso_maschile, sesso_femminile))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -203,23 +203,21 @@ Unione somministrazioni e platea (tramite codice regione)
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{vaccini }\OtherTok{\textless{}{-}} \FunctionTok{left\_join}\NormalTok{(somministrazioni\_vaccini, platea, }
-                     \AttributeTok{by =} \FunctionTok{c}\NormalTok{(}\StringTok{"area"}\NormalTok{, }\StringTok{"fascia\_anagrafica"}\NormalTok{))}
+\NormalTok{vaccini <-}\StringTok{ }\KeywordTok{left_join}\NormalTok{(somministrazioni_vaccini, platea, }
+                     \DataTypeTok{by =} \KeywordTok{c}\NormalTok{(}\StringTok{"area"}\NormalTok{, }\StringTok{"fascia_anagrafica"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{analisi-prima-dose---italia}{%
-\section{Analisi prima dose -
-Italia}\label{analisi-prima-dose---italia}}
+\section{Analisi prima dose - Italia}\label{analisi-prima-dose---italia}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(vaccini, }
-       \FunctionTok{aes}\NormalTok{( }\AttributeTok{x =}\NormalTok{ data\_somministrazione,}
-            \AttributeTok{y =}\NormalTok{ prima\_dose,}
-            \AttributeTok{color =}\NormalTok{ fascia\_anagrafica)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{facet\_wrap}\NormalTok{( }\SpecialCharTok{\textasciitilde{}}\NormalTok{fascia\_anagrafica)}
+\KeywordTok{ggplot}\NormalTok{(vaccini, }
+       \KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ data_somministrazione,}
+            \DataTypeTok{y =}\NormalTok{ prima_dose,}
+            \DataTypeTok{color =}\NormalTok{ fascia_anagrafica)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{( }\OperatorTok{~}\NormalTok{fascia_anagrafica)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -227,34 +225,34 @@ Italia}\label{analisi-prima-dose---italia}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{platea\_summary }\OtherTok{\textless{}{-}}\NormalTok{ platea }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(fascia\_anagrafica) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{totale\_popolazione =} \FunctionTok{sum}\NormalTok{(totale\_popolazione))}
+\NormalTok{platea_summary <-}\StringTok{ }\NormalTok{platea }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(fascia_anagrafica) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{totale_popolazione =} \KeywordTok{sum}\NormalTok{(totale_popolazione))}
 
-\NormalTok{prog\_vaccini }\OtherTok{\textless{}{-}}\NormalTok{ vaccini }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{group\_by}\NormalTok{(data\_somministrazione, fascia\_anagrafica) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{prima\_dose =} \FunctionTok{sum}\NormalTok{(prima\_dose)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(fascia\_anagrafica) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{( }\AttributeTok{prog\_shot =} \FunctionTok{cumsum}\NormalTok{(prima\_dose)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{left\_join}\NormalTok{(platea\_summary) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{( }\AttributeTok{prog\_perc =}\NormalTok{ prog\_shot }\SpecialCharTok{/}\NormalTok{ totale\_popolazione) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{prog_vaccini <-}\StringTok{ }\NormalTok{vaccini }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(data_somministrazione, fascia_anagrafica) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{prima_dose =} \KeywordTok{sum}\NormalTok{(prima_dose)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(fascia_anagrafica) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{prog_shot =} \KeywordTok{cumsum}\NormalTok{(prima_dose)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{left_join}\NormalTok{(platea_summary) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{prog_perc =}\NormalTok{ prog_shot }\OperatorTok{/}\StringTok{ }\NormalTok{totale_popolazione) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggplot}\NormalTok{(prog\_vaccini, }
-       \FunctionTok{aes}\NormalTok{( }\AttributeTok{x =}\NormalTok{ data\_somministrazione,}
-            \AttributeTok{y =}\NormalTok{ prog\_perc}\SpecialCharTok{*}\DecValTok{100}\NormalTok{,}
-            \AttributeTok{color =}\NormalTok{ fascia\_anagrafica)) }\SpecialCharTok{+}
-  \FunctionTok{geom\_line}\NormalTok{(}\AttributeTok{size=}\DecValTok{1}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{coord\_cartesian}\NormalTok{(}\AttributeTok{ylim =} \FunctionTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{)) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{( }\AttributeTok{title =} \StringTok{"Vaccinati prima dose"}\NormalTok{,}
-        \AttributeTok{subtitle =} \StringTok{"Percentuale di completamento per età"}\NormalTok{,}
-        \AttributeTok{y =} \ConstantTok{NULL}\NormalTok{,}
-        \AttributeTok{x =} \ConstantTok{NULL}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{(prog_vaccini, }
+       \KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ data_somministrazione,}
+            \DataTypeTok{y =}\NormalTok{ prog_perc}\OperatorTok{*}\DecValTok{100}\NormalTok{,}
+            \DataTypeTok{color =}\NormalTok{ fascia_anagrafica)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{size=}\DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{coord_cartesian}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{( }\DataTypeTok{title =} \StringTok{"Vaccinati prima dose"}\NormalTok{,}
+        \DataTypeTok{subtitle =} \StringTok{"Percentuale di completamento per età"}\NormalTok{,}
+        \DataTypeTok{y =} \OtherTok{NULL}\NormalTok{,}
+        \DataTypeTok{x =} \OtherTok{NULL}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -279,24 +277,43 @@ nell'aderire alle opportunità di vaccinarsi per la loro fascia d'età:
   della fase ripida
 \end{itemize}
 
-\hypertarget{analisi-prima-dose---regioni}{%
 \section{Analisi prima dose -
-Regioni}\label{analisi-prima-dose---regioni}}
+Regioni}\label{analisi-prima-dose---regioni}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{reg\_vaccini }\OtherTok{\textless{}{-}}\NormalTok{ vaccini }\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{group\_by}\NormalTok{(area, data\_somministrazione, fascia\_anagrafica) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}\AttributeTok{prima\_dose =} \FunctionTok{sum}\NormalTok{(prima\_dose)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ungroup}\NormalTok{() }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{group\_by}\NormalTok{(area, fascia\_anagrafica) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{( }\AttributeTok{prog\_shot =} \FunctionTok{cumsum}\NormalTok{(prima\_dose)) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{left\_join}\NormalTok{(platea) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{mutate}\NormalTok{( }\AttributeTok{prog\_perc =}\NormalTok{ prog\_shot }\SpecialCharTok{/}\NormalTok{ totale\_popolazione) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{ungroup}\NormalTok{()}
+\NormalTok{reg_vaccini <-}\StringTok{ }\NormalTok{vaccini }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(area, data_somministrazione, fascia_anagrafica) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{prima_dose =} \KeywordTok{sum}\NormalTok{(prima_dose)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(area, fascia_anagrafica) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{prog_shot =} \KeywordTok{cumsum}\NormalTok{(prima_dose)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{left_join}\NormalTok{(platea) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{( }\DataTypeTok{prog_perc =}\NormalTok{ prog_shot }\OperatorTok{/}\StringTok{ }\NormalTok{totale_popolazione) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{EDA_files/figure-latex/unnamed-chunk-10-1.pdf}
+
+Trentino
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{reg_vaccini }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(area }\OperatorTok{==}\StringTok{ "PAT"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ggplot}\NormalTok{(   }\KeywordTok{aes}\NormalTok{( }\DataTypeTok{x =}\NormalTok{ data_somministrazione,}
+            \DataTypeTok{y =}\NormalTok{ prog_perc}\OperatorTok{*}\DecValTok{100}\NormalTok{,}
+            \DataTypeTok{color =}\NormalTok{ fascia_anagrafica)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{size=}\DecValTok{1}\NormalTok{) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{coord_cartesian}\NormalTok{(}\DataTypeTok{ylim =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{)) }\OperatorTok{+}
+\StringTok{    }\KeywordTok{labs}\NormalTok{( }\DataTypeTok{title =} \StringTok{"Vaccinati prima dose PAT"}\NormalTok{,}
+        \DataTypeTok{subtitle =} \StringTok{"Percentuale di completamento per età"}\NormalTok{,}
+        \DataTypeTok{y =} \OtherTok{NULL}\NormalTok{,}
+        \DataTypeTok{x =} \OtherTok{NULL}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{EDA_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 \end{document}
